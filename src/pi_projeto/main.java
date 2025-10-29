@@ -4,7 +4,10 @@
  */
 package pi_projeto;
 
+import DAO.Cliente_DAO;
 import DAO.Funcionario_DAO;
+import java.sql.Date;
+import modelos.Cliente;
 import modelos.Funcionario;
 
 /**
@@ -17,17 +20,20 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Funcionario_DAO dao = new Funcionario_DAO();
+        Cliente c = new Cliente();
+        c.setNome("Guilherme Leite");
+        c.setDataCadastro(Date.valueOf("2025-10-29")); // yyyy-MM-dd
 
-        // 1️⃣ Inserir funcionário
-        Funcionario f1 = new Funcionario();
-        f1.setNome("Ana Silva");
-        f1.setCargo("Gerente");
-        if (dao.inserir(f1)) {
-            System.out.println("✅ Funcionário inserido! ID: " + f1.getID_Funcionario());
+        // Cria o DAO
+        Cliente_DAO dao = new Cliente_DAO();
+
+        // Insere o cliente no banco
+        boolean sucesso = dao.inserir(c);
+
+        if (sucesso) {
+            System.out.println("✅ Cliente inserido com sucesso! ID gerado: " + c.getID_Cliente());
+        } else {
+            System.out.println("❌ Falha ao inserir cliente.");
         }
-        
-        
     }
-    
 }
