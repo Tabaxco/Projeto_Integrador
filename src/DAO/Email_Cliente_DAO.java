@@ -36,7 +36,7 @@ public class Email_Cliente_DAO {
         }
     }
 
-    // Atualizar email
+    
     public boolean atualizar(Email_Cliente emailCliente) {
         String sql = "UPDATE Email_Cliente SET ID_Cliente = ?, Email = ? WHERE ID_Email = ?";
         try (Connection conn = conectar.getConexao();
@@ -55,7 +55,7 @@ public class Email_Cliente_DAO {
         }
     }
 
-    // Deletar email pelo ID
+    
     public boolean deletar(int id) {
         String sql = "DELETE FROM Email_Cliente WHERE ID_Email = ?";
         try (Connection conn = conectar.getConexao();
@@ -71,7 +71,7 @@ public class Email_Cliente_DAO {
         }
     }
 
-    // Buscar email pelo ID
+    
     public Email_Cliente buscarPorId(int id) {
         String sql = "SELECT * FROM Email_Cliente WHERE ID_Email = ?";
         try (Connection conn = conectar.getConexao();
@@ -95,7 +95,7 @@ public class Email_Cliente_DAO {
         return null;
     }
 
-    // Listar todos os emails
+   
     public List<Email_Cliente> listarTodos() {
         List<Email_Cliente> lista = new ArrayList<>();
         String sql = "SELECT * FROM Email_Cliente";

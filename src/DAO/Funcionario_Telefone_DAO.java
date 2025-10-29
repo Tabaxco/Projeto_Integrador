@@ -36,7 +36,7 @@ public class Funcionario_Telefone_DAO {
         }
     }
 
-    // Atualizar telefone do funcionário
+ 
     public boolean atualizar(Funcionario_Telefone telefoneFuncionario) {
         String sql = "UPDATE Funcionario_Telefone SET ID_Funcionario = ?, Telefone = ? WHERE ID_Telefone = ?";
         try (Connection conn = conectar.getConexao();
@@ -55,7 +55,7 @@ public class Funcionario_Telefone_DAO {
         }
     }
 
-    // Deletar telefone pelo ID
+  
     public boolean deletar(int id) {
         String sql = "DELETE FROM Funcionario_Telefone WHERE ID_Telefone = ?";
         try (Connection conn = conectar.getConexao();
@@ -71,7 +71,7 @@ public class Funcionario_Telefone_DAO {
         }
     }
 
-    // Buscar telefone pelo ID
+    
     public Funcionario_Telefone buscarPorId(int id) {
         String sql = "SELECT * FROM Funcionario_Telefone WHERE ID_Telefone = ?";
         try (Connection conn = conectar.getConexao();

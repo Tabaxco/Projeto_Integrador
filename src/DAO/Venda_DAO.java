@@ -39,7 +39,7 @@ public class Venda_DAO {
         }
     }
 
-    // Atualizar venda
+   
     public boolean atualizar(Venda venda) {
         String sql = "UPDATE Venda SET ID_Cliente = ?, Data = ?, Valor = ?, Status = ? WHERE ID_Venda = ?";
         try (Connection conn = conectar.getConexao();
@@ -60,7 +60,7 @@ public class Venda_DAO {
         }
     }
 
-    // Deletar venda pelo ID
+   
     public boolean deletar(int id) {
         String sql = "DELETE FROM Venda WHERE ID_Venda = ?";
         try (Connection conn = conectar.getConexao();
@@ -76,7 +76,7 @@ public class Venda_DAO {
         }
     }
 
-    // Buscar venda pelo ID
+    
     public Venda buscarPorId(int id) {
         String sql = "SELECT * FROM Venda WHERE ID_Venda = ?";
         try (Connection conn = conectar.getConexao();

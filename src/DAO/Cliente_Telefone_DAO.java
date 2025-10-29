@@ -37,7 +37,7 @@ public class Cliente_Telefone_DAO {
         }
     }
 
-    // Atualizar telefone
+    
     public boolean atualizar(Cliente_Telefone telefoneCliente) {
         String sql = "UPDATE Cliente_Telefone SET ID_Cliente = ?, Telefone = ? WHERE ID_Telefone = ?";
         try (Connection conn = conectar.getConexao();
@@ -56,7 +56,7 @@ public class Cliente_Telefone_DAO {
         }
     }
 
-    // Deletar telefone pelo ID
+    
     public boolean deletar(int id) {
         String sql = "DELETE FROM Cliente_Telefone WHERE ID_Telefone = ?";
         try (Connection conn = conectar.getConexao();
@@ -72,7 +72,7 @@ public class Cliente_Telefone_DAO {
         }
     }
 
-    // Buscar telefone pelo ID
+    
     public Cliente_Telefone buscarPorId(int id) {
         String sql = "SELECT * FROM Cliente_Telefone WHERE ID_Telefone = ?";
         try (Connection conn = conectar.getConexao();
@@ -96,7 +96,7 @@ public class Cliente_Telefone_DAO {
         return null;
     }
 
-    // Listar todos os telefones
+    
     public List<Cliente_Telefone> listarTodos() {
         List<Cliente_Telefone> lista = new ArrayList<>();
         String sql = "SELECT * FROM Cliente_Telefone";

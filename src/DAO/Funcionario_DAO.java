@@ -36,7 +36,7 @@ public class Funcionario_DAO {
         }
     }
 
-    // Atualizar funcionário
+
     public boolean atualizar(Funcionario funcionario) {
         String sql = "UPDATE Funcionario SET Nome = ?, Cargo = ? WHERE ID_Funcionario = ?";
         try (Connection conn = conectar.getConexao();
@@ -55,7 +55,7 @@ public class Funcionario_DAO {
         }
     }
 
-    // Deletar funcionário pelo ID
+    
     public boolean deletar(int id) {
         String sql = "DELETE FROM Funcionario WHERE ID_Funcionario = ?";
         try (Connection conn = conectar.getConexao();
@@ -71,7 +71,7 @@ public class Funcionario_DAO {
         }
     }
 
-    // Buscar funcionário pelo ID
+    
     public Funcionario buscarPorId(int id) {
         String sql = "SELECT * FROM Funcionario WHERE ID_Funcionario = ?";
         try (Connection conn = conectar.getConexao();
@@ -95,7 +95,7 @@ public class Funcionario_DAO {
         return null;
     }
 
-    // Listar todos os funcionários
+   
     public List<Funcionario> listarTodos() {
         List<Funcionario> lista = new ArrayList<>();
         String sql = "SELECT * FROM Funcionario";

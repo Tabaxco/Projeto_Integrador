@@ -24,7 +24,7 @@ public class Produto_DAO {
 
             int rowsAffected = stmt.executeUpdate();
 
-            // Pega o ID gerado
+       
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     produto.setIdProduto(rs.getInt(1));
@@ -59,7 +59,7 @@ public class Produto_DAO {
         }
     }
 
-    // Deletar produto pelo ID
+ 
     public boolean deletar(int id) {
         String sql = "DELETE FROM Produto WHERE ID_Produto = ?";
         try (Connection conn = conectar.getConexao();
@@ -75,7 +75,7 @@ public class Produto_DAO {
         }
     }
 
-    // Buscar produto pelo ID
+  
     public Produto buscarPorId(int id) {
         String sql = "SELECT * FROM Produto WHERE ID_Produto = ?";
         try (Connection conn = conectar.getConexao();
@@ -99,7 +99,7 @@ public class Produto_DAO {
         return null;
     }
 
-    // Listar todos os produtos
+  
     public List<Produto> listarTodos() {
         List<Produto> lista = new ArrayList<>();
         String sql = "SELECT * FROM Produto";

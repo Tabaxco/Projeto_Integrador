@@ -22,7 +22,7 @@ public class Cliente_DAO {
 
             int rowsAffected = stmt.executeUpdate();
 
-            // Pega o ID gerado
+          
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     cliente.setID_Cliente(rs.getInt(1));
@@ -37,7 +37,7 @@ public class Cliente_DAO {
         }
     }
 
-    // Atualizar cliente existente
+    
     public boolean atualizar(Cliente cliente) {
         String sql = "UPDATE Cliente SET Nome = ?, Data_Cadastro = ? WHERE ID_Cliente = ?";
         try (Connection conn = conectar.getConexao();
@@ -56,7 +56,7 @@ public class Cliente_DAO {
         }
     }
 
-    // Deletar cliente pelo ID
+  
     public boolean deletar(int id) {
         String sql = "DELETE FROM Cliente WHERE ID_Cliente = ?";
         try (Connection conn = conectar.getConexao();
@@ -72,7 +72,7 @@ public class Cliente_DAO {
         }
     }
 
-    // Buscar cliente pelo ID
+    
     public Cliente buscarPorId(int id) {
         String sql = "SELECT * FROM Cliente WHERE ID_Cliente = ?";
         try (Connection conn = conectar.getConexao();
@@ -96,7 +96,7 @@ public class Cliente_DAO {
         return null;
     }
 
-    // Listar todos os clientes
+  
     public List<Cliente> listarTodos() {
         List<Cliente> lista = new ArrayList<>();
         String sql = "SELECT * FROM Cliente";

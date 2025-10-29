@@ -36,7 +36,7 @@ public boolean inserir(Estoque estoque) {
         }
     }
 
-    // Atualizar estoque
+    
     public boolean atualizar(Estoque estoque) {
         String sql = "UPDATE Estoque SET ID_Produto = ?, Quantidade = ? WHERE ID_Estoque = ?";
         try (Connection conn = conectar.getConexao();
@@ -55,7 +55,7 @@ public boolean inserir(Estoque estoque) {
         }
     }
 
-    // Deletar estoque pelo ID
+    
     public boolean deletar(int id) {
         String sql = "DELETE FROM Estoque WHERE ID_Estoque = ?";
         try (Connection conn = conectar.getConexao();
@@ -71,7 +71,7 @@ public boolean inserir(Estoque estoque) {
         }
     }
 
-    // Buscar estoque pelo ID
+   
     public Estoque buscarPorId(int id) {
         String sql = "SELECT * FROM Estoque WHERE ID_Estoque = ?";
         try (Connection conn = conectar.getConexao();
@@ -95,7 +95,7 @@ public boolean inserir(Estoque estoque) {
         return null;
     }
 
-    // Listar todos os estoques
+  
     public List<Estoque> listarTodos() {
         List<Estoque> lista = new ArrayList<>();
         String sql = "SELECT * FROM Estoque";

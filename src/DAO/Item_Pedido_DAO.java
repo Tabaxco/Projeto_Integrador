@@ -37,7 +37,7 @@ public class Item_Pedido_DAO {
         }
     }
 
-    // Atualizar item do pedido
+  
     public boolean atualizar(Item_Pedido item) {
         String sql = "UPDATE Item_Pedido SET ID_Venda = ?, ID_Produto = ? WHERE ID_Item_Pedido = ?";
         try (Connection conn = conectar.getConexao();
@@ -56,7 +56,7 @@ public class Item_Pedido_DAO {
         }
     }
 
-    // Deletar item pelo ID
+    
     public boolean deletar(int id) {
         String sql = "DELETE FROM Item_Pedido WHERE ID_Item_Pedido = ?";
         try (Connection conn = conectar.getConexao();
@@ -72,7 +72,7 @@ public class Item_Pedido_DAO {
         }
     }
 
-    // Buscar item pelo ID
+    
     public Item_Pedido buscarPorId(int id) {
         String sql = "SELECT * FROM Item_Pedido WHERE ID_Item_Pedido = ?";
         try (Connection conn = conectar.getConexao();
@@ -96,7 +96,7 @@ public class Item_Pedido_DAO {
         return null;
     }
 
-    // Listar todos os itens
+ 
     public List<Item_Pedido> listarTodos() {
         List<Item_Pedido> lista = new ArrayList<>();
         String sql = "SELECT * FROM Item_Pedido";
