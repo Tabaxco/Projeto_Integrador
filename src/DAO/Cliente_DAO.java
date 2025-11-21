@@ -28,9 +28,9 @@ public class Cliente_DAO {
                 cliente.setID_Cliente(rs.getInt(1));
             }
         }
+        DAO.Cliente_Telefone_DAO.inserir(cliente);
+        DAO.Email_Cliente_DAO.inserir(cliente);
     }
-    DAO.Cliente_Telefone_DAO.inserir(cliente);
-    DAO.Email_Cliente_DAO.inserir(cliente);
     
 }
 
@@ -61,9 +61,10 @@ public class Cliente_DAO {
 
         stmt.setInt(1, cliente.getID_Cliente());
         stmt.executeUpdate();
+        
+        DAO.Cliente_Telefone_DAO.deletar(cliente);
+        DAO.Email_Cliente_DAO.deletar(cliente);
     }
-    DAO.Cliente_Telefone_DAO.deletar(cliente);
-    DAO.Email_Cliente_DAO.deletar(cliente);
 }
 
     
