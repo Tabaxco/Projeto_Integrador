@@ -12,89 +12,79 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente_DAO {
-     public boolean inserir(Cliente cliente) {
-        String sql = "INSERT INTO Cliente (Nome, Data_Cadastro) VALUES (?, ?)";
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+     public static void inserir(Cliente cliente) throws SQLException {
+    String sql = "INSERT INTO Cliente (Nome, Data_Cadastro) VALUES (?, ?)";
 
-            stmt.setString(1, cliente.getNome());
-            stmt.setDate(2, cliente.getDataCadastro());
+    try (Connection conn = conectar.getConexao();
+         PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            int rowsAffected = stmt.executeUpdate();
+        stmt.setString(1, cliente.getNome());
+        stmt.setDate(2, cliente.getDataCadastro());
 
-          
-            try (ResultSet rs = stmt.getGeneratedKeys()) {
-                if (rs.next()) {
-                    cliente.setID_Cliente(rs.getInt(1));
-                }
+        stmt.executeUpdate();
+
+        try (ResultSet rs = stmt.getGeneratedKeys()) {
+            if (rs.next()) {
+                cliente.setID_Cliente(rs.getInt(1));
             }
-
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao inserir cliente: " + e.getMessage());
-            return false;
         }
     }
+    DAO.Cliente_Telefone_DAO.inserir(cliente);
+    
+}
+
 
     
-    public boolean atualizar(Cliente cliente) {
-        String sql = "UPDATE Cliente SET Nome = ?, Data_Cadastro = ? WHERE ID_Cliente = ?";
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public static void atualizar(Cliente cliente) throws SQLException {
+    String sql = "UPDATE Cliente SET Nome = ? WHERE ID_Cliente = ?";
 
-            stmt.setString(1, cliente.getNome());
-            stmt.setDate(2, cliente.getDataCadastro());
-            stmt.setInt(3, cliente.getID_Cliente());
+    try (Connection conn = conectar.getConexao();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
+        stmt.setString(1, cliente.getNome());
+        stmt.setInt(2, cliente.getID_Cliente());
 
-        } catch (SQLException e) {
-            System.out.println("Erro ao atualizar cliente: " + e.getMessage());
-            return false;
-        }
+        stmt.executeUpdate();
     }
+    DAO.Cliente_Telefone_DAO.atualizar(cliente);
+    
+}
 
   
-    public boolean deletar(int id) {
-        String sql = "DELETE FROM Cliente WHERE ID_Cliente = ?";
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public static void deletar(Cliente cliente) throws SQLException {
+    String sql = "DELETE FROM Cliente WHERE ID_Cliente = ?";
 
-            stmt.setInt(1, id);
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
+    try (Connection conn = conectar.getConexao();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        } catch (SQLException e) {
-            System.out.println("Erro ao deletar cliente: " + e.getMessage());
-            return false;
-        }
+        stmt.setInt(1, cliente.getID_Cliente());
+        stmt.executeUpdate();
     }
+    DAO.Cliente_Telefone_DAO.deletar(cliente);
+}
 
     
-    public Cliente buscarPorId(int id) {
-        String sql = "SELECT * FROM Cliente WHERE ID_Cliente = ?";
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public Cliente buscarPorId(Cliente cliente) throws SQLException {
+    String sql = "SELECT * FROM Cliente WHERE ID_Cliente = ?";
 
-            stmt.setInt(1, id);
+    try (Connection conn = conectar.getConexao();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    Cliente cliente = new Cliente();
-                    cliente.setID_Cliente(rs.getInt("ID_Cliente"));
-                    cliente.setNome(rs.getString("Nome"));
-                    cliente.setDataCadastro(rs.getDate("Data_Cadastro"));
-                    return cliente;
-                }
+        stmt.setInt(1, cliente.getID_Cliente());
+
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                cliente.setNome(rs.getString("Nome"));
+                cliente.setDataCadastro(rs.getDate("Data_Cadastro"));
+                cliente.setTelefone(rs.getString("Telefone"));
+                cliente.setEmail(rs.getString("Email"));
+                return cliente;
             }
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao buscar cliente: " + e.getMessage());
         }
-        return null;
     }
+
+    return null; 
+}
 
   
     public List<Cliente> listarTodos() {

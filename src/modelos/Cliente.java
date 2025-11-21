@@ -11,13 +11,17 @@ public class Cliente {
     private int ID_Cliente;
     private String nome;
     private Date dataCadastro;
+    private String telefone;
+    private String email;
 
     public Cliente() {}
 
-    public Cliente(int ID_Cliente, String nome, Date dataCadastro) {
+    public Cliente(int ID_Cliente, String nome, Date dataCadastro, String telefone, String email) {
         this.ID_Cliente = ID_Cliente;
         this.nome = nome;
         this.dataCadastro = dataCadastro;
+        this.telefone = telefone;
+        this.email = email;
     }
 
     public int getID_Cliente() { return ID_Cliente; }
@@ -28,4 +32,11 @@ public class Cliente {
 
     public Date getDataCadastro() { return dataCadastro; }
     public void setDataCadastro(Date dataCadastro) { this.dataCadastro = dataCadastro; }
+    
+    public String getTelefone() { return telefone; }
+    public void setTelefone(String telefone) {this.telefone = telefone;}
+    
+    public String getEmail() { return email; }
+    public void setEmail(String email) {this.email = email;}
+    
 }

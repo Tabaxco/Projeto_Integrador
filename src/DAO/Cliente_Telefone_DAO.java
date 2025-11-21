@@ -11,66 +11,54 @@ import conexao.conectar;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import modelos.Cliente;
 
 public class Cliente_Telefone_DAO {
-    public boolean inserir(Cliente_Telefone telefoneCliente) {
-        String sql = "INSERT INTO Cliente_Telefone (ID_Cliente, Telefone) VALUES (?, ?)";
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+    public static int inserir(Cliente cliente) throws SQLException {
+    String sql = "INSERT INTO Cliente_Telefone (ID_Cliente, Telefone) VALUES (?, ?)";
 
-            stmt.setInt(1, telefoneCliente.getID_Cliente());
-            stmt.setString(2, telefoneCliente.getTelefone());
+    try (Connection conn = conectar.getConexao();
+         PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            int rowsAffected = stmt.executeUpdate();
+        stmt.setInt(1, cliente.getID_Cliente());
+        stmt.setString(2, cliente.getTelefone());
 
-            try (ResultSet rs = stmt.getGeneratedKeys()) {
-                if (rs.next()) {
-                    telefoneCliente.setID_Telefone(rs.getInt(1));
-                }
+        stmt.executeUpdate();
+
+        try (ResultSet rs = stmt.getGeneratedKeys()) {
+            if (rs.next()) {
+                return rs.getInt(1); 
             }
-
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao inserir telefone: " + e.getMessage());
-            return false;
         }
     }
 
+    return -1;
+}
     
-    public boolean atualizar(Cliente_Telefone telefoneCliente) {
-        String sql = "UPDATE Cliente_Telefone SET ID_Cliente = ?, Telefone = ? WHERE ID_Telefone = ?";
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public static void atualizar(Cliente cliente) throws SQLException {
+    String sql = "UPDATE Cliente_Telefone SET Telefone = ? WHERE ID_Cliente = ?";
 
-            stmt.setInt(1, telefoneCliente.getID_Cliente());
-            stmt.setString(2, telefoneCliente.getTelefone());
-            stmt.setInt(3, telefoneCliente.getID_Telefone());
+    try (Connection conn = conectar.getConexao();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
+        stmt.setString(1, cliente.getTelefone());
+        stmt.setInt(2, cliente.getID_Cliente());
 
-        } catch (SQLException e) {
-            System.out.println("Erro ao atualizar telefone: " + e.getMessage());
-            return false;
-        }
+        stmt.executeUpdate();
     }
-
+}
     
-    public boolean deletar(int id) {
-        String sql = "DELETE FROM Cliente_Telefone WHERE ID_Telefone = ?";
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    
+    public static void deletar(Cliente cliente) throws SQLException {
+    String sql = "DELETE FROM Cliente_Telefone WHERE ID_Cliente = ?";
 
-            stmt.setInt(1, id);
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
+    try (Connection conn = conectar.getConexao();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        } catch (SQLException e) {
-            System.out.println("Erro ao deletar telefone: " + e.getMessage());
-            return false;
-        }
+        stmt.setInt(1, cliente.getID_Cliente());
+        stmt.executeUpdate();
     }
+}
 
     
     public Cliente_Telefone buscarPorId(int id) {

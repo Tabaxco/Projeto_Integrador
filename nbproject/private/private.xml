@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/guilherme.lrodrigue1/OneDrive%20-%20SENAC%20-%20SP/Área%20de%20Trabalho/Projeto_Integrador/src/DAO/Cliente_DAO.java</file>
-            <file>file:/C:/Users/guilherme.lrodrigue1/OneDrive%20-%20SENAC%20-%20SP/Área%20de%20Trabalho/Projeto_Integrador/src/pi_projeto/main.java</file>
+            <file>file:/home/tabaxco/Área%20de%20trabalho/Projetos/Projeto_Integrador/src/DAO/Cliente_DAO.java</file>
+            <file>file:/home/tabaxco/Área%20de%20trabalho/Projetos/Projeto_Integrador/src/modelos/Cliente.java</file>
+            <file>file:/home/tabaxco/Área%20de%20trabalho/Projetos/Projeto_Integrador/src/view/Cliente_View.java</file>
+            <file>file:/home/tabaxco/Área%20de%20trabalho/Projetos/Projeto_Integrador/src/DAO/Cliente_Telefone_DAO.java</file>
         </group>
     </open-files>
 </project-private>
