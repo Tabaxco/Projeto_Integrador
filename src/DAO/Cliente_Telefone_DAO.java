@@ -61,50 +61,25 @@ public class Cliente_Telefone_DAO {
 }
 
     
-    public Cliente_Telefone buscarPorId(int id) {
-        String sql = "SELECT * FROM Cliente_Telefone WHERE ID_Telefone = ?";
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public static Cliente_Telefone buscarPorCliente(Cliente cliente) throws SQLException {
+    String sql = "SELECT * FROM Cliente_Telefone WHERE ID_Cliente = ?";
 
-            stmt.setInt(1, id);
+    try (Connection conn = conectar.getConexao();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    Cliente_Telefone telefoneCliente = new Cliente_Telefone();
-                    telefoneCliente.setID_Telefone(rs.getInt("ID_Telefone"));
-                    telefoneCliente.setID_Cliente(rs.getInt("ID_Cliente"));
-                    telefoneCliente.setTelefone(rs.getString("Telefone"));
-                    return telefoneCliente;
-                }
-            }
+        stmt.setInt(1, cliente.getID_Cliente());
 
-        } catch (SQLException e) {
-            System.out.println("Erro ao buscar telefone: " + e.getMessage());
-        }
-        return null;
-    }
-
-    
-    public List<Cliente_Telefone> listarTodos() {
-        List<Cliente_Telefone> lista = new ArrayList<>();
-        String sql = "SELECT * FROM Cliente_Telefone";
-
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
                 Cliente_Telefone telefoneCliente = new Cliente_Telefone();
                 telefoneCliente.setID_Telefone(rs.getInt("ID_Telefone"));
                 telefoneCliente.setID_Cliente(rs.getInt("ID_Cliente"));
                 telefoneCliente.setTelefone(rs.getString("Telefone"));
-                lista.add(telefoneCliente);
+                return telefoneCliente;
             }
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao listar telefones: " + e.getMessage());
         }
-
-        return lista;
     }
+
+    return null; // se não encontrar
+}
 }

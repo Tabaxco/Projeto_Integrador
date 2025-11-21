@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import modelos.Email_Cliente;
+import modelos.Cliente;
 import conexao.conectar;
 
 import java.sql.*;
@@ -12,110 +9,75 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Email_Cliente_DAO {
-     public boolean inserir(Email_Cliente emailCliente) {
+
+    // Inserir email de um cliente
+    public static int inserir(Cliente cliente) throws SQLException {
         String sql = "INSERT INTO Email_Cliente (ID_Cliente, Email) VALUES (?, ?)";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, emailCliente.getID_Cliente());
-            stmt.setString(2, emailCliente.getEmail());
+            stmt.setInt(1, cliente.getID_Cliente());
+            stmt.setString(2, cliente.getEmail());
 
-            int rowsAffected = stmt.executeUpdate();
+            stmt.executeUpdate();
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
-                    emailCliente.setID_Email(rs.getInt(1));
+                    return rs.getInt(1); // retorna ID_Email gerado
                 }
             }
-
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao inserir email: " + e.getMessage());
-            return false;
         }
+
+        return -1; // se não gerar ID
     }
 
-    
-    public boolean atualizar(Email_Cliente emailCliente) {
-        String sql = "UPDATE Email_Cliente SET ID_Cliente = ?, Email = ? WHERE ID_Email = ?";
+    // Atualizar email de um cliente
+    public static void atualizar(Cliente cliente) throws SQLException {
+        String sql = "UPDATE Email_Cliente SET Email = ? WHERE ID_Cliente = ?";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, emailCliente.getID_Cliente());
-            stmt.setString(2, emailCliente.getEmail());
-            stmt.setInt(3, emailCliente.getID_Email());
+            stmt.setString(1, cliente.getEmail());
+            stmt.setInt(2, cliente.getID_Cliente());
 
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao atualizar email: " + e.getMessage());
-            return false;
+            stmt.executeUpdate();
         }
     }
 
-    
-    public boolean deletar(int id) {
-        String sql = "DELETE FROM Email_Cliente WHERE ID_Email = ?";
+    // Deletar todos emails de um cliente
+    public static void deletar(Cliente cliente) throws SQLException {
+        String sql = "DELETE FROM Email_Cliente WHERE ID_Cliente = ?";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao deletar email: " + e.getMessage());
-            return false;
+            stmt.setInt(1, cliente.getID_Cliente());
+            stmt.executeUpdate();
         }
     }
 
-    
-    public Email_Cliente buscarPorId(int id) {
-        String sql = "SELECT * FROM Email_Cliente WHERE ID_Email = ?";
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    // Buscar todos os emails de um cliente
+    public static Email_Cliente buscarUmEmail(Cliente cliente) throws SQLException {
+    String sql = "SELECT * FROM Email_Cliente WHERE ID_Cliente = ? LIMIT 1";
 
-            stmt.setInt(1, id);
+    try (Connection conn = conectar.getConexao();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    Email_Cliente emailCliente = new Email_Cliente();
-                    emailCliente.setID_Email(rs.getInt("ID_Email"));
-                    emailCliente.setID_Cliente(rs.getInt("ID_Cliente"));
-                    emailCliente.setEmail(rs.getString("Email"));
-                    return emailCliente;
-                }
-            }
+        stmt.setInt(1, cliente.getID_Cliente());
 
-        } catch (SQLException e) {
-            System.out.println("Erro ao buscar email: " + e.getMessage());
-        }
-        return null;
-    }
-
-   
-    public List<Email_Cliente> listarTodos() {
-        List<Email_Cliente> lista = new ArrayList<>();
-        String sql = "SELECT * FROM Email_Cliente";
-
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
                 Email_Cliente emailCliente = new Email_Cliente();
                 emailCliente.setID_Email(rs.getInt("ID_Email"));
                 emailCliente.setID_Cliente(rs.getInt("ID_Cliente"));
                 emailCliente.setEmail(rs.getString("Email"));
-                lista.add(emailCliente);
+                return emailCliente;
             }
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao listar emails: " + e.getMessage());
         }
-
-        return lista;
     }
+
+    return null; // se não encontrar nenhum email
+}
 }

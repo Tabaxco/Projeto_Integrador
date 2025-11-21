@@ -30,6 +30,7 @@ public class Cliente_DAO {
         }
     }
     DAO.Cliente_Telefone_DAO.inserir(cliente);
+    DAO.Email_Cliente_DAO.inserir(cliente);
     
 }
 
@@ -47,6 +48,7 @@ public class Cliente_DAO {
         stmt.executeUpdate();
     }
     DAO.Cliente_Telefone_DAO.atualizar(cliente);
+    DAO.Email_Cliente_DAO.atualizar(cliente);
     
 }
 
@@ -61,53 +63,51 @@ public class Cliente_DAO {
         stmt.executeUpdate();
     }
     DAO.Cliente_Telefone_DAO.deletar(cliente);
+    DAO.Email_Cliente_DAO.deletar(cliente);
 }
 
     
-    public Cliente buscarPorId(Cliente cliente) throws SQLException {
-    String sql = "SELECT * FROM Cliente WHERE ID_Cliente = ?";
+    public static Cliente buscarPorId(Cliente cliente) throws SQLException {
+    
+    String sqlCliente = "SELECT * FROM Cliente WHERE ID_Cliente = ?";
 
     try (Connection conn = conectar.getConexao();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
+         PreparedStatement stmtCliente = conn.prepareStatement(sqlCliente)) {
 
-        stmt.setInt(1, cliente.getID_Cliente());
+        stmtCliente.setInt(1, cliente.getID_Cliente());
 
-        try (ResultSet rs = stmt.executeQuery()) {
+        try (ResultSet rs = stmtCliente.executeQuery()) {
             if (rs.next()) {
                 cliente.setNome(rs.getString("Nome"));
                 cliente.setDataCadastro(rs.getDate("Data_Cadastro"));
-                cliente.setTelefone(rs.getString("Telefone"));
-                cliente.setEmail(rs.getString("Email"));
-                return cliente;
+            } else {
+                return null; 
             }
         }
-    }
 
-    return null; 
-}
-
-  
-    public List<Cliente> listarTodos() {
-        List<Cliente> lista = new ArrayList<>();
-        String sql = "SELECT * FROM Cliente";
-
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                Cliente cliente = new Cliente();
-                cliente.setID_Cliente(rs.getInt("ID_Cliente"));
-                cliente.setNome(rs.getString("Nome"));
-                cliente.setDataCadastro(rs.getDate("Data_Cadastro"));
-                lista.add(cliente);
+        
+        String sqlTelefone = "SELECT Telefone FROM Cliente_Telefone WHERE ID_Cliente = ?";
+        try (PreparedStatement stmtTel = conn.prepareStatement(sqlTelefone)) {
+            stmtTel.setInt(1, cliente.getID_Cliente());
+            try (ResultSet rsTel = stmtTel.executeQuery()) {
+                if (rsTel.next()) {
+                    cliente.setTelefone(rsTel.getString("Telefone")); 
+                }
             }
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao listar clientes: " + e.getMessage());
         }
 
-        return lista;
+        
+        String sqlEmail = "SELECT Email FROM Email_Cliente WHERE ID_Cliente = ?";
+        try (PreparedStatement stmtEmail = conn.prepareStatement(sqlEmail)) {
+            stmtEmail.setInt(1, cliente.getID_Cliente());
+            try (ResultSet rsEmail = stmtEmail.executeQuery()) {
+                if (rsEmail.next()) {
+                    cliente.setEmail(rsEmail.getString("Email")); 
+                }
+            }
+        }
+
+        return cliente; 
     }
 }
-
+}

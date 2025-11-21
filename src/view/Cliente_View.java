@@ -207,6 +207,21 @@ public class Cliente_View extends javax.swing.JPanel {
         Cliente readCliente = new Cliente();
         readCliente.setID_Cliente(IDcliente);
         
+        try {
+        readCliente = Cliente_DAO.buscarPorId(readCliente); // retorna o cliente com os dados preenchidos
+
+    if (readCliente != null) {
+        // Preenche os campos do JPanel
+        textNome.setText(readCliente.getNome());
+        textTelefone.setText(readCliente.getTelefone());
+        textEmail.setText(readCliente.getEmail());
+    } else {
+        JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
+    }
+
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null, "Erro ao buscar cliente: " + e.getMessage());
+}
         
     }//GEN-LAST:event_readButtonActionPerformed
 
