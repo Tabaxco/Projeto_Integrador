@@ -156,6 +156,7 @@ public class Cliente_View extends javax.swing.JPanel {
         Cliente novoCliente = new Cliente();
         novoCliente.setNome(nome);
         novoCliente.setDataCadastro(hoje);
+        novoCliente.setEmail(email);
         novoCliente.setTelefone(telefone);
         
         try {
