@@ -9,22 +9,26 @@ package modelos;
  * @author guilherme.lrodrigue1
  */
 public class Produto {
-    private int idProduto;
+    private int ID_Produto;
     private String nomeProduto;
     private double preco;
     private String categoria;
+    private int qtde;
+    private int ID_Estoque;
 
     public Produto() {}
 
-    public Produto(int idProduto, String nomeProduto, double preco, String categoria) {
-        this.idProduto = idProduto;
+    public Produto(int ID_Produto, String nomeProduto, double preco, String categoria, int qtde, int ID_Estoque) {
+        this.ID_Produto = ID_Produto;
         this.nomeProduto = nomeProduto;
         this.preco = preco;
         this.categoria = categoria;
+        this.qtde = qtde;
+        this.ID_Estoque = ID_Estoque;
     }
 
-    public int getIdProduto() { return idProduto; }
-    public void setIdProduto(int idProduto) { this.idProduto = idProduto; }
+    public int getIdProduto() { return ID_Produto; }
+    public void setIdProduto(int ID_Produto) { this.ID_Produto = ID_Produto; }
 
     public String getNomeProduto() { return nomeProduto; }
     public void setNomeProduto(String nomeProduto) { this.nomeProduto = nomeProduto; }
@@ -34,4 +38,10 @@ public class Produto {
 
     public String getCategoria() { return categoria; }
     public void setCategoria(String categoria) { this.categoria = categoria; }
+    
+    public int getQtde() { return qtde; }
+    public void setQtde(int qtde) { this.qtde = qtde; }
+    
+    public int getIdEstoque() { return ID_Estoque; }
+    public void setIdEstoque(int ID_Estoque) { this.ID_Estoque = ID_Estoque; }
 }

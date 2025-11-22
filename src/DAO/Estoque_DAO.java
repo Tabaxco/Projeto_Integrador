@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import modelos.Estoque;
+import modelos.Produto;
 import conexao.conectar;
 
 import java.sql.*;
@@ -12,110 +9,71 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Estoque_DAO {
-public boolean inserir(Estoque estoque) {
+
+    // INSERIR — recebe Produto (como no seu original)
+    public static void inserir(Produto produto) throws SQLException {
         String sql = "INSERT INTO Estoque (ID_Produto, Quantidade) VALUES (?, ?)";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, estoque.getID_Produto());
-            stmt.setInt(2, estoque.getQuantidade());
+            stmt.setInt(1, produto.getIdProduto());
+            stmt.setInt(2, produto.getQtde());
 
-            int rowsAffected = stmt.executeUpdate();
+            stmt.executeUpdate();
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
-                    estoque.setID_Estoque(rs.getInt(1));
+                    produto.setIdEstoque(rs.getInt(1));
                 }
             }
-
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao inserir estoque: " + e.getMessage());
-            return false;
         }
     }
 
-    
-    public boolean atualizar(Estoque estoque) {
-        String sql = "UPDATE Estoque SET ID_Produto = ?, Quantidade = ? WHERE ID_Estoque = ?";
+    // ATUALIZAR — recebe Estoque
+    public static void atualizar(Produto produto) throws SQLException {
+        String sql = "UPDATE Estoque SET Quantidade = ? WHERE ID_Produto = ?";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, estoque.getID_Produto());
-            stmt.setInt(2, estoque.getQuantidade());
-            stmt.setInt(3, estoque.getID_Estoque());
+            stmt.setInt(1, produto.getIdProduto());
+            stmt.setInt(2, produto.getQtde());
 
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao atualizar estoque: " + e.getMessage());
-            return false;
+            stmt.executeUpdate();
         }
     }
 
-    
-    public boolean deletar(int id) {
-        String sql = "DELETE FROM Estoque WHERE ID_Estoque = ?";
+    // DELETAR — recebe Estoque, igual padrão do Cliente_DAO
+    public static void deletar(Produto produto) throws SQLException {
+        String sql = "DELETE FROM Estoque WHERE ID_Produto = ?";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao deletar estoque: " + e.getMessage());
-            return false;
+            stmt.setInt(1, produto.getIdProduto());
+            stmt.executeUpdate();
         }
     }
 
-   
-    public Estoque buscarPorId(int id) {
-        String sql = "SELECT * FROM Estoque WHERE ID_Estoque = ?";
+    // BUSCAR POR ID — recebe Estoque igual ao padrão do Cliente_DAO
+    public static Estoque buscarPorId(Estoque estoque) throws SQLException {
+        String sql = "SELECT * FROM Estoque WHERE ID_Produto = ?";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
+            stmt.setInt(1, estoque.getID_Estoque());
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    Estoque estoque = new Estoque();
-                    estoque.setID_Estoque(rs.getInt("ID_Estoque"));
                     estoque.setID_Produto(rs.getInt("ID_Produto"));
                     estoque.setQuantidade(rs.getInt("Quantidade"));
                     return estoque;
                 }
             }
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao buscar estoque: " + e.getMessage());
         }
+
         return null;
-    }
-
-  
-    public List<Estoque> listarTodos() {
-        List<Estoque> lista = new ArrayList<>();
-        String sql = "SELECT * FROM Estoque";
-
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                Estoque estoque = new Estoque();
-                estoque.setID_Estoque(rs.getInt("ID_Estoque"));
-                estoque.setID_Produto(rs.getInt("ID_Produto"));
-                estoque.setQuantidade(rs.getInt("Quantidade"));
-                lista.add(estoque);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao listar estoques: " + e.getMessage());
-        }
-
-        return lista;
     }
 }

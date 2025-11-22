@@ -1,126 +1,101 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import modelos.Produto;
 import conexao.conectar;
-import java.math.BigDecimal;
 
 import java.sql.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Produto_DAO {
-     public boolean inserir(Produto produto) {
+
+    // INSERIR
+    public static void inserir(Produto produto) throws SQLException {
         String sql = "INSERT INTO Produto (Nome_Produto, Preco, Categoria) VALUES (?, ?, ?)";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, produto.getNomeProduto());
-            stmt.setBigDecimal(2, BigDecimal.valueOf(produto.getPreco())); // converte double -> BigDecimal
+            stmt.setBigDecimal(2, BigDecimal.valueOf(produto.getPreco())); 
             stmt.setString(3, produto.getCategoria());
 
-            int rowsAffected = stmt.executeUpdate();
+            stmt.executeUpdate();
 
-       
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     produto.setIdProduto(rs.getInt(1));
                 }
             }
-
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao inserir produto: " + e.getMessage());
-            return false;
+            DAO.Estoque_DAO.inserir(produto);
         }
     }
 
-    // Atualizar produto
-    public boolean atualizar(Produto produto) {
+    // ATUALIZAR
+    public static void atualizar(Produto produto) throws SQLException {
         String sql = "UPDATE Produto SET Nome_Produto = ?, Preco = ?, Categoria = ? WHERE ID_Produto = ?";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, produto.getNomeProduto());
-            stmt.setBigDecimal(2, BigDecimal.valueOf(produto.getPreco())); // converte double -> BigDecimal
+            stmt.setBigDecimal(2, BigDecimal.valueOf(produto.getPreco()));
             stmt.setString(3, produto.getCategoria());
             stmt.setInt(4, produto.getIdProduto());
 
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao atualizar produto: " + e.getMessage());
-            return false;
+            stmt.executeUpdate();
         }
+        DAO.Estoque_DAO.atualizar(produto);
     }
 
- 
-    public boolean deletar(int id) {
+    // DELETAR
+    public static void deletar(Produto produto) throws SQLException {
         String sql = "DELETE FROM Produto WHERE ID_Produto = ?";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao deletar produto: " + e.getMessage());
-            return false;
+            stmt.setInt(1, produto.getIdProduto());
+            stmt.executeUpdate();
         }
+        DAO.Estoque_DAO.deletar(produto);
     }
 
-  
-    public Produto buscarPorId(int id) {
-        String sql = "SELECT * FROM Produto WHERE ID_Produto = ?";
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public static Produto buscarPorId(Produto produto) throws SQLException {
+    String sqlProduto = "SELECT * FROM Produto WHERE ID_Produto = ?";
+    String sqlEstoque = "SELECT Quantidade FROM Estoque WHERE ID_Produto = ?";
 
-            stmt.setInt(1, id);
+    try (Connection conn = conectar.getConexao()) {
+
+        try (PreparedStatement stmt = conn.prepareStatement(sqlProduto)) {
+            stmt.setInt(1, produto.getIdProduto());
+
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    Produto produto = new Produto();
-                    produto.setIdProduto(rs.getInt("ID_Produto"));
                     produto.setNomeProduto(rs.getString("Nome_Produto"));
-                    produto.setPreco(rs.getBigDecimal("Preco").doubleValue()); // converte BigDecimal -> double
+                    produto.setPreco(rs.getBigDecimal("Preco").doubleValue());
                     produto.setCategoria(rs.getString("Categoria"));
-                    return produto;
+                } else {
+                    return null; 
                 }
             }
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao buscar produto: " + e.getMessage());
         }
-        return null;
-    }
 
-  
-    public List<Produto> listarTodos() {
-        List<Produto> lista = new ArrayList<>();
-        String sql = "SELECT * FROM Produto";
 
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try (PreparedStatement stmt2 = conn.prepareStatement(sqlEstoque)) {
+            stmt2.setInt(1, produto.getIdProduto());
 
-            while (rs.next()) {
-                Produto produto = new Produto();
-                produto.setIdProduto(rs.getInt("ID_Produto"));
-                produto.setNomeProduto(rs.getString("Nome_Produto"));
-                produto.setPreco(rs.getBigDecimal("Preco").doubleValue()); // BigDecimal -> double
-                produto.setCategoria(rs.getString("Categoria"));
-                lista.add(produto);
+            try (ResultSet rs2 = stmt2.executeQuery()) {
+                if (rs2.next()) {
+                    produto.setQtde(rs2.getInt("Quantidade"));
+                } else {
+                    produto.setQtde(0); // caso não tenha estoque
+                }
             }
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao listar produtos: " + e.getMessage());
         }
-
-        return lista;
     }
+
+    return produto;
+}
 }

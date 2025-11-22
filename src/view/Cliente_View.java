@@ -50,7 +50,7 @@ public class Cliente_View extends javax.swing.JPanel {
 
         jLabel3.setText("Telefone");
 
-        jLabel4.setText("ID_Cliente");
+        jLabel4.setText("ID do Cliente");
 
         addButton.setText("Adicionar");
         addButton.addActionListener(this::addButtonActionPerformed);
