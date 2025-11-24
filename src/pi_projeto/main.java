@@ -12,6 +12,7 @@ import modelos.Funcionario;
 import javax.swing.JFrame;
 import view.Cliente_View;
 import view.Estoque_View;
+import view.Funcionario_View;
 /**
  *
  * @author guilherme.lrodrigue1
@@ -24,7 +25,7 @@ public class main {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Teste do painel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setContentPane(new Estoque_View());
+        frame.setContentPane(new Funcionario_View());
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

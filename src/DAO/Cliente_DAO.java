@@ -44,11 +44,12 @@ public class Cliente_DAO {
 
         stmt.setString(1, cliente.getNome());
         stmt.setInt(2, cliente.getID_Cliente());
-
-        stmt.executeUpdate();
         
         DAO.Cliente_Telefone_DAO.atualizar(cliente);
         DAO.Email_Cliente_DAO.atualizar(cliente);
+
+        stmt.executeUpdate();
+        
     }
     
 }

@@ -1,121 +1,117 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import modelos.Funcionario;
 import conexao.conectar;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Funcionario_DAO {
-    public boolean inserir(Funcionario funcionario) {
+
+    public static void inserir(Funcionario funcionario) throws SQLException {
         String sql = "INSERT INTO Funcionario (Nome, Cargo) VALUES (?, ?)";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, funcionario.getNome());
             stmt.setString(2, funcionario.getCargo());
 
-            int rowsAffected = stmt.executeUpdate();
+            stmt.executeUpdate();
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     funcionario.setID_Funcionario(rs.getInt(1));
                 }
             }
-
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao inserir funcionário: " + e.getMessage());
-            return false;
+            DAO.Funcionario_Telefone_DAO.inserir(funcionario);
+            DAO.Salario_DAO.inserir(funcionario);
         }
     }
 
 
-    public boolean atualizar(Funcionario funcionario) {
+    public static void atualizar(Funcionario funcionario) throws SQLException {
         String sql = "UPDATE Funcionario SET Nome = ?, Cargo = ? WHERE ID_Funcionario = ?";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, funcionario.getNome());
             stmt.setString(2, funcionario.getCargo());
             stmt.setInt(3, funcionario.getID_Funcionario());
+            
+            DAO.Funcionario_Telefone_DAO.atualizar(funcionario);
+            DAO.Salario_DAO.atualizar(funcionario);
 
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao atualizar funcionário: " + e.getMessage());
-            return false;
+            stmt.executeUpdate();
         }
     }
 
-    
-    public boolean deletar(int id) {
+
+    public static void deletar(Funcionario funcionario) throws SQLException {
         String sql = "DELETE FROM Funcionario WHERE ID_Funcionario = ?";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
+            stmt.setInt(1, funcionario.getID_Funcionario());
+            
+            DAO.Funcionario_Telefone_DAO.deletar(funcionario);
+            DAO.Salario_DAO.deletar(funcionario);
 
-        } catch (SQLException e) {
-            System.out.println("Erro ao deletar funcionário: " + e.getMessage());
-            return false;
+            stmt.executeUpdate();
         }
     }
 
-    
-    public Funcionario buscarPorId(int id) {
-        String sql = "SELECT * FROM Funcionario WHERE ID_Funcionario = ?";
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
+    public static Funcionario buscarPorId(Funcionario funcionario) throws SQLException {
+
+    String sqlFuncionario = "SELECT * FROM Funcionario WHERE ID_Funcionario = ?";
+    String sqlTelefone = "SELECT Telefone FROM Funcionario_Telefone WHERE ID_Funcionario = ?";
+    String sqlSalario = "SELECT Valor_Salario FROM Salario WHERE ID_Funcionario = ?";
+
+    try (Connection conn = conectar.getConexao()) {
+
+        
+        try (PreparedStatement stmt = conn.prepareStatement(sqlFuncionario)) {
+            stmt.setInt(1, funcionario.getID_Funcionario());
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    Funcionario funcionario = new Funcionario();
-                    funcionario.setID_Funcionario(rs.getInt("ID_Funcionario"));
                     funcionario.setNome(rs.getString("Nome"));
                     funcionario.setCargo(rs.getString("Cargo"));
-                    return funcionario;
+                } else {
+                    return null; // não existe funcionário com esse ID
                 }
             }
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao buscar funcionário: " + e.getMessage());
         }
-        return null;
-    }
 
-   
-    public List<Funcionario> listarTodos() {
-        List<Funcionario> lista = new ArrayList<>();
-        String sql = "SELECT * FROM Funcionario";
+        
+        try (PreparedStatement stmt2 = conn.prepareStatement(sqlTelefone)) {
+            stmt2.setInt(1, funcionario.getID_Funcionario());
 
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                Funcionario funcionario = new Funcionario();
-                funcionario.setID_Funcionario(rs.getInt("ID_Funcionario"));
-                funcionario.setNome(rs.getString("Nome"));
-                funcionario.setCargo(rs.getString("Cargo"));
-                lista.add(funcionario);
+            try (ResultSet rs2 = stmt2.executeQuery()) {
+                if (rs2.next()) {
+                    funcionario.setTelefone(rs2.getString("Telefone"));
+                } else {
+                    funcionario.setTelefone(null); 
+                }
             }
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao listar funcionários: " + e.getMessage());
         }
 
-        return lista;
+        
+        try (PreparedStatement stmt3 = conn.prepareStatement(sqlSalario)) {
+            stmt3.setInt(1, funcionario.getID_Funcionario());
+
+            try (ResultSet rs3 = stmt3.executeQuery()) {
+                if (rs3.next()) {
+                    funcionario.setSalario(rs3.getDouble("Valor_Salario"));
+                } else {
+                    funcionario.setSalario(0.0); 
+                }
+            }
+        }
     }
+
+    return funcionario;
+}
 }

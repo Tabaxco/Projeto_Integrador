@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Produto_DAO {
 
-    // INSERIR
+    
     public static void inserir(Produto produto) throws SQLException {
         String sql = "INSERT INTO Produto (Nome_Produto, Preco, Categoria) VALUES (?, ?, ?)";
 
@@ -32,7 +32,7 @@ public class Produto_DAO {
         }
     }
 
-    // ATUALIZAR
+    
     public static void atualizar(Produto produto) throws SQLException {
         String sql = "UPDATE Produto SET Nome_Produto = ?, Preco = ?, Categoria = ? WHERE ID_Produto = ?";
 
@@ -49,7 +49,7 @@ public class Produto_DAO {
         }
     }
 
-    // DELETAR
+    
     public static void deletar(Produto produto) throws SQLException {
         String sql = "DELETE FROM Produto WHERE ID_Produto = ?";
 
@@ -92,7 +92,7 @@ public class Produto_DAO {
                 if (rs2.next()) {
                     produto.setQtde(rs2.getInt("Quantidade"));
                 } else {
-                    produto.setQtde(0); // caso não tenha estoque
+                    produto.setQtde(0); 
                 }
             }
         }

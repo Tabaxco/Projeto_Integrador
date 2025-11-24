@@ -1,122 +1,77 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
-import modelos.Salario;
+import modelos.Funcionario;
 import conexao.conectar;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.math.BigDecimal;
 
 public class Salario_DAO {
-     public boolean inserir(Salario salario) {
+
+    // INSERIR
+    public static void inserir(Funcionario funcionario) throws SQLException {
         String sql = "INSERT INTO Salario (ID_Funcionario, Valor_Salario) VALUES (?, ?)";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, salario.getID_Funcionario());
-            stmt.setBigDecimal(2, BigDecimal.valueOf(salario.getValor_Salario()));
+            stmt.setInt(1, funcionario.getID_Funcionario());
+            stmt.setDouble(2, funcionario.getSalario()); // <-- DOUBLE DIRETO
 
-            int rowsAffected = stmt.executeUpdate();
+            stmt.executeUpdate();
 
+            
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
-                    salario.setID_Salario(rs.getInt(1));
+                    funcionario.setID_Salario(rs.getInt(1));
                 }
             }
-
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao inserir salário: " + e.getMessage());
-            return false;
         }
     }
 
-    // Atualizar salário
-    public boolean atualizar(Salario salario) {
-        String sql = "UPDATE Salario SET ID_Funcionario = ?, Valor_Salario = ? WHERE ID_Salario = ?";
+  
+    public static void atualizar(Funcionario funcionario) throws SQLException {
+        String sql = "UPDATE Salario SET Valor_Salario = ? WHERE ID_Funcionario = ?";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, salario.getID_Funcionario());
-            stmt.setBigDecimal(2, BigDecimal.valueOf(salario.getValor_Salario()));
-            stmt.setInt(3, salario.getID_Salario());
+            stmt.setDouble(1, funcionario.getSalario());  
+            stmt.setInt(2, funcionario.getID_Funcionario());
 
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao atualizar salário: " + e.getMessage());
-            return false;
+            stmt.executeUpdate();
         }
     }
 
-    // Deletar salário pelo ID
-    public boolean deletar(int id) {
-        String sql = "DELETE FROM Salario WHERE ID_Salario = ?";
+ 
+    public static void deletar(Funcionario funcionario) throws SQLException {
+        String sql = "DELETE FROM Salario WHERE ID_Funcionario = ?";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao deletar salário: " + e.getMessage());
-            return false;
+            stmt.setInt(1, funcionario.getID_Funcionario());
+            stmt.executeUpdate();
         }
     }
 
-    // Buscar salário pelo ID
-    public Salario buscarPorId(int id) {
-        String sql = "SELECT * FROM Salario WHERE ID_Salario = ?";
+
+    public static Funcionario buscarPorId(Funcionario funcionario) throws SQLException {
+        String sql = "SELECT Valor_Salario FROM Salario WHERE ID_Funcionario = ?";
+
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
+            stmt.setInt(1, funcionario.getID_Funcionario());
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    Salario salario = new Salario();
-                    salario.setID_Salario(rs.getInt("ID_Salario"));
-                    salario.setID_Funcionario(rs.getInt("ID_Funcionario"));
-                    salario.setValor_Salario(rs.getBigDecimal("Valor_Salario").doubleValue());
-                    return salario;
+                    funcionario.setSalario(rs.getDouble("Valor_Salario")); 
+                } else {
+                    return null;
                 }
             }
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao buscar salário: " + e.getMessage());
-        }
-        return null;
-    }
-
-    // Listar todos os salários
-    public List<Salario> listarTodos() {
-        List<Salario> lista = new ArrayList<>();
-        String sql = "SELECT * FROM Salario";
-
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                Salario salario = new Salario();
-                salario.setID_Salario(rs.getInt("ID_Salario"));
-                salario.setID_Funcionario(rs.getInt("ID_Funcionario"));
-                salario.setValor_Salario(rs.getBigDecimal("Valor_Salario").doubleValue());
-                lista.add(salario);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao listar salários: " + e.getMessage());
         }
 
-        return lista;
+        return funcionario;
     }
 }

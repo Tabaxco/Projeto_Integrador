@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Email_Cliente_DAO {
 
-    // Inserir email de um cliente
+    
     public static int inserir(Cliente cliente) throws SQLException {
         String sql = "INSERT INTO Email_Cliente (ID_Cliente, Email) VALUES (?, ?)";
 
@@ -24,15 +24,15 @@ public class Email_Cliente_DAO {
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
-                    return rs.getInt(1); // retorna ID_Email gerado
+                    return rs.getInt(1); 
                 }
             }
         }
 
-        return -1; // se não gerar ID
+        return -1; 
     }
 
-    // Atualizar email de um cliente
+    
     public static void atualizar(Cliente cliente) throws SQLException {
         String sql = "UPDATE Email_Cliente SET Email = ? WHERE ID_Cliente = ?";
 
@@ -46,7 +46,7 @@ public class Email_Cliente_DAO {
         }
     }
 
-    // Deletar todos emails de um cliente
+    
     public static void deletar(Cliente cliente) throws SQLException {
         String sql = "DELETE FROM Email_Cliente WHERE ID_Cliente = ?";
 
@@ -58,7 +58,7 @@ public class Email_Cliente_DAO {
         }
     }
 
-    // Buscar todos os emails de um cliente
+    
     public static Email_Cliente buscarUmEmail(Cliente cliente) throws SQLException {
     String sql = "SELECT * FROM Email_Cliente WHERE ID_Cliente = ? LIMIT 1";
 
@@ -78,6 +78,6 @@ public class Email_Cliente_DAO {
         }
     }
 
-    return null; // se não encontrar nenhum email
+    return null; 
 }
 }

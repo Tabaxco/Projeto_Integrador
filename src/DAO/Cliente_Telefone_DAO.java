@@ -80,6 +80,6 @@ public class Cliente_Telefone_DAO {
         }
     }
 
-    return null; // se não encontrar
+    return null; 
 }
 }
