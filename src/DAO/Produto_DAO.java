@@ -45,8 +45,8 @@ public class Produto_DAO {
             stmt.setInt(4, produto.getIdProduto());
 
             stmt.executeUpdate();
+            DAO.Estoque_DAO.atualizar(produto);
         }
-        DAO.Estoque_DAO.atualizar(produto);
     }
 
     // DELETAR
@@ -55,11 +55,13 @@ public class Produto_DAO {
 
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            DAO.Estoque_DAO.deletar(produto);
 
             stmt.setInt(1, produto.getIdProduto());
             stmt.executeUpdate();
+            
         }
-        DAO.Estoque_DAO.deletar(produto);
     }
 
     public static Produto buscarPorId(Produto produto) throws SQLException {

@@ -197,6 +197,7 @@ public class Cliente_View extends javax.swing.JPanel {
         
         try {
             DAO.Cliente_DAO.deletar(delCliente);
+            JOptionPane.showMessageDialog(null, "Cliente excluído corretamente.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
         }
@@ -209,10 +210,9 @@ public class Cliente_View extends javax.swing.JPanel {
         readCliente.setID_Cliente(IDcliente);
         
         try {
-        readCliente = Cliente_DAO.buscarPorId(readCliente); // retorna o cliente com os dados preenchidos
+        readCliente = Cliente_DAO.buscarPorId(readCliente);
 
     if (readCliente != null) {
-        // Preenche os campos do JPanel
         textNome.setText(readCliente.getNome());
         textTelefone.setText(readCliente.getTelefone());
         textEmail.setText(readCliente.getEmail());

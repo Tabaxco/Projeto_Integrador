@@ -4,6 +4,8 @@
  */
 package view;
 
+import DAO.Produto_DAO;
+import javax.swing.JOptionPane;
 import modelos.Produto;
 
 /**
@@ -62,10 +64,13 @@ public class Estoque_View extends javax.swing.JPanel {
         addButton.addActionListener(this::addButtonActionPerformed);
 
         altButton.setText("Alterar");
+        altButton.addActionListener(this::altButtonActionPerformed);
 
         delButton.setText("Deletar");
+        delButton.addActionListener(this::delButtonActionPerformed);
 
         readButton.setText("Buscar");
+        readButton.addActionListener(this::readButtonActionPerformed);
 
         textIDP.addActionListener(this::textIDPActionPerformed);
 
@@ -86,25 +91,29 @@ public class Estoque_View extends javax.swing.JPanel {
                         .addComponent(jLabel7))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(199, 199, 199)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textIDP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel8)))
+                .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(addButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textIDP, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(altButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(delButton))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(textPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                        .addComponent(textCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textNome)
+                            .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(altButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(delButton))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(textPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
@@ -171,8 +180,75 @@ public class Estoque_View extends javax.swing.JPanel {
         novoProduto.setCategoria(categoria);
         novoProduto.setQtde(qtde);
         
+        try {
+            Produto_DAO.inserir(novoProduto);
+            JOptionPane.showMessageDialog(null, "Produto inserido corretamente.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
+        }
+        
         
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void altButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altButtonActionPerformed
+        String nome = textNome.getText();
+        double preco = Double.parseDouble(textPreco.getText());
+        String categoria = textCategoria.getText();
+        int qtde = Integer.parseInt(textQtde.getText());
+        int id = Integer.parseInt(textIDP.getText());
+        
+        Produto altProduto = new Produto();
+        altProduto.setNomeProduto(nome);
+        altProduto.setPreco(preco);
+        altProduto.setCategoria(categoria);
+        altProduto.setQtde(qtde);
+        altProduto.setIdProduto(id);
+        
+        try {
+            Produto_DAO.atualizar(altProduto);
+            JOptionPane.showMessageDialog(null, "Cliente atualizado corretamente.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
+        }
+        
+    }//GEN-LAST:event_altButtonActionPerformed
+
+    private void delButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delButtonActionPerformed
+        int id = Integer.parseInt(textIDP.getText());
+        
+        Produto delProduto = new Produto();
+        delProduto.setIdProduto(id);
+        
+        try {
+            Produto_DAO.deletar(delProduto);
+            JOptionPane.showMessageDialog(null, "Produto excluído corretamente.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
+        }
+    }//GEN-LAST:event_delButtonActionPerformed
+
+    private void readButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readButtonActionPerformed
+        int id = Integer.parseInt(textIDP.getText());
+        
+        Produto readProduto = new Produto();
+        readProduto.setIdProduto(id);
+        
+        try {
+            readProduto = Produto_DAO.buscarPorId(readProduto);
+            
+            if (readProduto != null) {
+                textNome.setText(readProduto.getNomeProduto());
+                textCategoria.setText(readProduto.getCategoria());
+                textPreco.setText(Double.toString(readProduto.getPreco()));
+                textQtde.setText(Integer.toString(readProduto.getQtde()));
+            } else {
+                JOptionPane.showMessageDialog(null, "Produto não encontrado.");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar produto: " + e.getMessage());
+        }
+    }//GEN-LAST:event_readButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

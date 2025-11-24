@@ -46,9 +46,10 @@ public class Cliente_DAO {
         stmt.setInt(2, cliente.getID_Cliente());
 
         stmt.executeUpdate();
+        
+        DAO.Cliente_Telefone_DAO.atualizar(cliente);
+        DAO.Email_Cliente_DAO.atualizar(cliente);
     }
-    DAO.Cliente_Telefone_DAO.atualizar(cliente);
-    DAO.Email_Cliente_DAO.atualizar(cliente);
     
 }
 
@@ -58,12 +59,13 @@ public class Cliente_DAO {
 
     try (Connection conn = conectar.getConexao();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
+        
+        DAO.Cliente_Telefone_DAO.deletar(cliente);
+        DAO.Email_Cliente_DAO.deletar(cliente);
 
         stmt.setInt(1, cliente.getID_Cliente());
         stmt.executeUpdate();
         
-        DAO.Cliente_Telefone_DAO.deletar(cliente);
-        DAO.Email_Cliente_DAO.deletar(cliente);
     }
 }
 

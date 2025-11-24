@@ -55,6 +55,7 @@ public class Estoque_DAO {
             stmt.executeUpdate();
         }
     }
+    
 
     // BUSCAR POR ID — recebe Estoque igual ao padrão do Cliente_DAO
     public static Estoque buscarPorId(Estoque estoque) throws SQLException {
