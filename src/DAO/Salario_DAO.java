@@ -20,11 +20,6 @@ public class Salario_DAO {
             stmt.executeUpdate();
 
             
-            try (ResultSet rs = stmt.getGeneratedKeys()) {
-                if (rs.next()) {
-                    funcionario.setID_Salario(rs.getInt(1));
-                }
-            }
         }
     }
 

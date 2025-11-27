@@ -10,8 +10,6 @@ package modelos;
  */
 public class Funcionario {
     private int ID_Funcionario;
-    private int ID_Salario;
-    private int ID_Telefone;   
     private String Nome;
     private String Cargo;
     private String telefone;
@@ -19,10 +17,8 @@ public class Funcionario {
     
     public Funcionario() {}
     
-    public Funcionario(int ID_Funcionario, int ID_Salario, int ID_Telefone, String Nome, String Cargo, String telefone, double salario) {
+    public Funcionario(int ID_Funcionario, String Nome, String Cargo, String telefone, double salario) {
         this.ID_Funcionario = ID_Funcionario;
-        this.ID_Salario = ID_Salario;
-        this.ID_Telefone = ID_Telefone;
         this.Nome = Nome;
         this.Cargo = Cargo;
         this.telefone = telefone;
@@ -31,12 +27,7 @@ public class Funcionario {
     
     public int getID_Funcionario() {return ID_Funcionario;}
     public void setID_Funcionario(int ID_Funcionario) {this.ID_Funcionario = ID_Funcionario;}
-    
-    public int getID_Salario() {return ID_Salario;}
-    public  void setID_Salario(int ID_Salario) {this.ID_Salario = ID_Salario;}
-    
-    public int getID_Telefone() { return ID_Telefone; }
-    public void setID_Telefone(int ID_Telefone) { this.ID_Telefone = ID_Telefone; }
+  
     
     public String getNome () {return Nome;}
     public void setNome (String Nome) {this.Nome = Nome;}

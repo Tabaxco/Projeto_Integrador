@@ -168,7 +168,7 @@ public class Funcionario_View extends javax.swing.JPanel {
             DAO.Funcionario_DAO.inserir(addFuncionario);
             JOptionPane.showMessageDialog(null, "Funcionário inserido corretamente.");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
+            JOptionPane.showMessageDialog(null, "Erro ao inserir funcionário: " + e.getMessage());
         }
         
         

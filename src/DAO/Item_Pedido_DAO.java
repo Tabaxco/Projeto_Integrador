@@ -23,12 +23,6 @@ public class Item_Pedido_DAO {
 
             int rowsAffected = stmt.executeUpdate();
 
-            try (ResultSet rs = stmt.getGeneratedKeys()) {
-                if (rs.next()) {
-                    item.setID_Item_Pedido(rs.getInt(1));
-                }
-            }
-
             return rowsAffected > 0;
 
         } catch (SQLException e) {
@@ -39,13 +33,13 @@ public class Item_Pedido_DAO {
 
   
     public boolean atualizar(Item_Pedido item) {
-        String sql = "UPDATE Item_Pedido SET ID_Venda = ?, ID_Produto = ? WHERE ID_Item_Pedido = ?";
+        String sql = "UPDATE Item_Pedido SET Qtde WHERE ID_Venda = ?";
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, item.getID_Venda());
             stmt.setInt(2, item.getID_Produto());
-            stmt.setInt(3, item.getID_Item_Pedido());
+            stmt.setInt(3, item.getQtde());
 
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
@@ -74,7 +68,7 @@ public class Item_Pedido_DAO {
 
     
     public Item_Pedido buscarPorId(int id) {
-        String sql = "SELECT * FROM Item_Pedido WHERE ID_Item_Pedido = ?";
+        String sql = "SELECT * FROM Item_Pedido WHERE ID_Venda = ?";
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -83,7 +77,6 @@ public class Item_Pedido_DAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     Item_Pedido item = new Item_Pedido();
-                    item.setID_Item_Pedido(rs.getInt("ID_Item_Pedido"));
                     item.setID_Venda(rs.getInt("ID_Venda"));
                     item.setID_Produto(rs.getInt("ID_Produto"));
                     return item;
@@ -94,29 +87,5 @@ public class Item_Pedido_DAO {
             System.out.println("Erro ao buscar item do pedido: " + e.getMessage());
         }
         return null;
-    }
-
- 
-    public List<Item_Pedido> listarTodos() {
-        List<Item_Pedido> lista = new ArrayList<>();
-        String sql = "SELECT * FROM Item_Pedido";
-
-        try (Connection conn = conectar.getConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                Item_Pedido item = new Item_Pedido();
-                item.setID_Item_Pedido(rs.getInt("ID_Item_Pedido"));
-                item.setID_Venda(rs.getInt("ID_Venda"));
-                item.setID_Produto(rs.getInt("ID_Produto"));
-                lista.add(item);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao listar itens do pedido: " + e.getMessage());
-        }
-
-        return lista;
     }
 }

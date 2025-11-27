@@ -25,7 +25,7 @@ public class main {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Teste do painel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setContentPane(new Funcionario_View());
+        frame.setContentPane(new Cliente_View());
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

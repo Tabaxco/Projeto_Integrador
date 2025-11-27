@@ -80,7 +80,7 @@ public class Funcionario_DAO {
                     funcionario.setNome(rs.getString("Nome"));
                     funcionario.setCargo(rs.getString("Cargo"));
                 } else {
-                    return null; // não existe funcionário com esse ID
+                    return null; 
                 }
             }
         }

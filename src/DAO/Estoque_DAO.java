@@ -21,16 +21,10 @@ public class Estoque_DAO {
             stmt.setInt(2, produto.getQtde());
 
             stmt.executeUpdate();
-
-            try (ResultSet rs = stmt.getGeneratedKeys()) {
-                if (rs.next()) {
-                    produto.setIdEstoque(rs.getInt(1));
-                }
-            }
         }
     }
 
-    // ATUALIZAR — recebe Estoque
+    
     public static void atualizar(Produto produto) throws SQLException {
         String sql = "UPDATE Estoque SET Quantidade = ? WHERE ID_Produto = ?";
 

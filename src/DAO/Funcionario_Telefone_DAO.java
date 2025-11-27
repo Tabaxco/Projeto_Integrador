@@ -19,12 +19,6 @@ public class Funcionario_Telefone_DAO {
 
             stmt.executeUpdate();
 
-            
-            try (ResultSet rs = stmt.getGeneratedKeys()) {
-                if (rs.next()) {
-                    funcionario.setID_Telefone(rs.getInt(1));
-                }
-            }
         }
     }
 
@@ -69,7 +63,6 @@ public class Funcionario_Telefone_DAO {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    funcionario.setID_Telefone(rs.getInt("ID_Telefone"));
                     funcionario.setTelefone(rs.getString("Telefone"));
                 } else {
                     return null;
