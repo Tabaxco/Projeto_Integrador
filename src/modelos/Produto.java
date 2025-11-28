@@ -14,17 +14,26 @@ public class Produto {
     private double preco;
     private String categoria;
     private int qtde;
-    private int ID_Estoque;
+    private String imagem;
+    private String peso;
+    private String altura;
+    private String largura;
+    private String comprimento;
 
     public Produto() {}
 
-    public Produto(int ID_Produto, String nomeProduto, double preco, String categoria, int qtde, int ID_Estoque) {
+    public Produto(int ID_Produto, String nomeProduto, double preco, String categoria, 
+            int qtde, String imagem, String peso, String altura, String largura, String comprimento) {
         this.ID_Produto = ID_Produto;
         this.nomeProduto = nomeProduto;
         this.preco = preco;
         this.categoria = categoria;
         this.qtde = qtde;
-        this.ID_Estoque = ID_Estoque;
+        this.imagem = imagem;
+        this.peso = peso;
+        this.altura = altura;
+        this.largura = largura;
+        this.comprimento = comprimento;
     }
 
     public int getIdProduto() { return ID_Produto; }
@@ -42,6 +51,19 @@ public class Produto {
     public int getQtde() { return qtde; }
     public void setQtde(int qtde) { this.qtde = qtde; }
     
-    public int getIdEstoque() { return ID_Estoque; }
-    public void setIdEstoque(int ID_Estoque) { this.ID_Estoque = ID_Estoque; }
+    public String getImagem() {return imagem;}
+    public void setImagem(String imagem) {this.imagem = imagem;}
+    
+    public String getPeso() {return peso;}
+    public void setPeso(String peso) {this.peso = peso;}
+    
+    public String getAltura() {return altura;}
+    public void setAltura(String altura) {this.altura = altura;}
+    
+    public String getLargura() {return largura;}
+    public void setLargura(String largura) {this.largura = largura;}
+    
+    public String getComprimento() {return comprimento;}
+    public void setComprimento(String comprimento) {this.comprimento = comprimento;}
+
 }

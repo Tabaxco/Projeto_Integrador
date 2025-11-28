@@ -86,8 +86,6 @@ public class Funcionario_View extends javax.swing.JPanel {
 
         jLabel7.setText("Usuário");
 
-        textData.setEnabled(false);
-
         jLabel8.setText("Data de Contratação");
 
         jLabel9.setText("Senha");
@@ -278,7 +276,7 @@ public class Funcionario_View extends javax.swing.JPanel {
             DAO.Funcionario_DAO.atualizar(altFuncionario);
             JOptionPane.showMessageDialog(null, "Funcionário atualizado corretamente.");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar funcionário: " + e.getMessage());
         }
         
     }//GEN-LAST:event_altButtonActionPerformed
@@ -294,7 +292,7 @@ public class Funcionario_View extends javax.swing.JPanel {
             DAO.Funcionario_DAO.deletar(delFuncionario);
             JOptionPane.showMessageDialog(null, "Funcionário deletado corretamente.");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
+            JOptionPane.showMessageDialog(null, "Erro ao deletar funcionário: " + e.getMessage());
         }
     }//GEN-LAST:event_delButtonActionPerformed
 
@@ -323,7 +321,7 @@ public class Funcionario_View extends javax.swing.JPanel {
              textData.setText(readFuncionario.getDataCadastro().toString());
          }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
+            JOptionPane.showMessageDialog(null, "Erro ao buscar funcionário: " + e.getMessage());
         }
     }//GEN-LAST:event_readButtonActionPerformed
 

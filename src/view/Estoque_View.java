@@ -45,6 +45,16 @@ public class Estoque_View extends javax.swing.JPanel {
         delButton = new javax.swing.JButton();
         readButton = new javax.swing.JButton();
         textIDP = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        textImg = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        textPeso = new javax.swing.JTextField();
+        textComprimento = new javax.swing.JTextField();
+        textLargura = new javax.swing.JTextField();
+        textAltura = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -74,6 +84,16 @@ public class Estoque_View extends javax.swing.JPanel {
 
         textIDP.addActionListener(this::textIDPActionPerformed);
 
+        jLabel2.setText("Imagem");
+
+        jLabel3.setText("Peso");
+
+        jLabel4.setText("Comprimento");
+
+        jLabel9.setText("Largura");
+
+        jLabel10.setText("Altura");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -81,48 +101,65 @@ public class Estoque_View extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel1)
-                        .addGap(78, 78, 78)
-                        .addComponent(jLabel5)
-                        .addGap(73, 73, 73)
-                        .addComponent(jLabel6)
-                        .addGap(58, 58, 58)
-                        .addComponent(jLabel7))
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(199, 199, 199)
-                        .addComponent(jLabel8)))
-                .addContainerGap(52, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(231, 231, 231)
                         .addComponent(textIDP, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(239, 239, 239)
+                        .addComponent(jLabel8))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textPeso)
                             .addComponent(textNome)
                             .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(altButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(delButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(delButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(readButton))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(textPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(textQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))
+                                .addGap(23, 23, 23)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(textPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textComprimento, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(textLargura, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(readButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel1)
+                        .addGap(78, 78, 78)
+                        .addComponent(jLabel5)
+                        .addGap(57, 57, 57)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel7)
+                                .addGap(67, 67, 67)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel10)
+                                .addGap(169, 169, 169))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(textAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(textCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(textQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(textImg, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,31 +169,47 @@ public class Estoque_View extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textQtde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addComponent(jLabel8)
+                    .addComponent(textQtde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textComprimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(textIDP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
                     .addComponent(altButton)
                     .addComponent(delButton)
                     .addComponent(readButton))
-                .addGap(48, 48, 48))
+                .addGap(33, 33, 33))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,18 +226,29 @@ public class Estoque_View extends javax.swing.JPanel {
         double preco = Double.parseDouble(textPreco.getText());
         String categoria = textCategoria.getText();
         int qtde = Integer.parseInt(textQtde.getText());
+        String imagem = textImg.getText();
+        String altura = textAltura.getText();
+        String peso = textPeso.getText();
+        String largura = textLargura.getText();
+        String comprimento = textComprimento.getText();
+        
         
         Produto novoProduto = new Produto();
         novoProduto.setNomeProduto(nome);
         novoProduto.setPreco(preco);
         novoProduto.setCategoria(categoria);
         novoProduto.setQtde(qtde);
+        novoProduto.setImagem(imagem);
+        novoProduto.setAltura(altura);
+        novoProduto.setLargura(largura);
+        novoProduto.setPeso(peso);
+        novoProduto.setComprimento(comprimento);
         
         try {
             Produto_DAO.inserir(novoProduto);
             JOptionPane.showMessageDialog(null, "Produto inserido corretamente.");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
+            JOptionPane.showMessageDialog(null, "Erro ao inserir produto: " + e.getMessage());
         }
         
         
@@ -195,6 +259,11 @@ public class Estoque_View extends javax.swing.JPanel {
         double preco = Double.parseDouble(textPreco.getText());
         String categoria = textCategoria.getText();
         int qtde = Integer.parseInt(textQtde.getText());
+        String imagem = textImg.getText();
+        String altura = textAltura.getText();
+        String peso = textPeso.getText();
+        String largura = textLargura.getText();
+        String comprimento = textComprimento.getText();
         int id = Integer.parseInt(textIDP.getText());
         
         Produto altProduto = new Produto();
@@ -202,13 +271,18 @@ public class Estoque_View extends javax.swing.JPanel {
         altProduto.setPreco(preco);
         altProduto.setCategoria(categoria);
         altProduto.setQtde(qtde);
+        altProduto.setImagem(imagem);
+        altProduto.setAltura(altura);
+        altProduto.setPeso(peso);
+        altProduto.setLargura(largura);
+        altProduto.setComprimento(comprimento);
         altProduto.setIdProduto(id);
         
         try {
             Produto_DAO.atualizar(altProduto);
             JOptionPane.showMessageDialog(null, "Cliente atualizado corretamente.");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar produto: " + e.getMessage());
         }
         
     }//GEN-LAST:event_altButtonActionPerformed
@@ -223,7 +297,7 @@ public class Estoque_View extends javax.swing.JPanel {
             Produto_DAO.deletar(delProduto);
             JOptionPane.showMessageDialog(null, "Produto excluído corretamente.");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
+            JOptionPane.showMessageDialog(null, "Erro ao excluir funcionário: " + e.getMessage());
         }
     }//GEN-LAST:event_delButtonActionPerformed
 
@@ -239,8 +313,13 @@ public class Estoque_View extends javax.swing.JPanel {
             if (readProduto != null) {
                 textNome.setText(readProduto.getNomeProduto());
                 textCategoria.setText(readProduto.getCategoria());
-                textPreco.setText(Double.toString(readProduto.getPreco()));
+                textPreco.setText("R$"+Double.toString(readProduto.getPreco()));
                 textQtde.setText(Integer.toString(readProduto.getQtde()));
+                textImg.setText(readProduto.getImagem());
+                textPeso.setText(readProduto.getPeso());
+                textAltura.setText(readProduto.getAltura());
+                textLargura.setText(readProduto.getLargura());
+                textComprimento.setText(readProduto.getComprimento());
             } else {
                 JOptionPane.showMessageDialog(null, "Produto não encontrado.");
             }
@@ -256,15 +335,25 @@ public class Estoque_View extends javax.swing.JPanel {
     private javax.swing.JButton altButton;
     private javax.swing.JButton delButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton readButton;
+    private javax.swing.JTextField textAltura;
     private javax.swing.JTextField textCategoria;
+    private javax.swing.JTextField textComprimento;
     private javax.swing.JTextField textIDP;
+    private javax.swing.JTextField textImg;
+    private javax.swing.JTextField textLargura;
     private javax.swing.JTextField textNome;
+    private javax.swing.JTextField textPeso;
     private javax.swing.JTextField textPreco;
     private javax.swing.JTextField textQtde;
     // End of variables declaration//GEN-END:variables
