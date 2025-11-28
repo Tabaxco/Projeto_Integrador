@@ -33,8 +33,8 @@ public class Funcionario_View extends javax.swing.JPanel {
         textNome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         textTelefone = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        textCargo = new javax.swing.JTextField();
+        textFuncao = new javax.swing.JLabel();
+        textFunc = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         textIDF = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
@@ -43,6 +43,16 @@ public class Funcionario_View extends javax.swing.JPanel {
         readButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         textSalario = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        textDepartamento = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        textEmail = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        textUser = new javax.swing.JTextField();
+        textData = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        textSenha = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -50,7 +60,9 @@ public class Funcionario_View extends javax.swing.JPanel {
 
         jLabel2.setText("Telefone");
 
-        jLabel3.setText("Cargo");
+        textFuncao.setText("Função");
+
+        textFunc.addActionListener(this::textFuncActionPerformed);
 
         jLabel4.setText("Id do Funcionário");
 
@@ -68,48 +80,89 @@ public class Funcionario_View extends javax.swing.JPanel {
 
         jLabel5.setText("Salário");
 
+        jLabel6.setText("Departamento");
+
+        jLabel3.setText("E-mail");
+
+        jLabel7.setText("Usuário");
+
+        textData.setEnabled(false);
+
+        jLabel8.setText("Data de Contratação");
+
+        jLabel9.setText("Senha");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(199, 199, 199))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(addButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(altButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(delButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(readButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1)
-                .addGap(101, 101, 101)
-                .addComponent(jLabel2)
-                .addGap(91, 91, 91)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(51, 51, 51))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(textTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(textCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(textSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(textIDF, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(216, 216, 216))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(jLabel1)
+                                .addGap(60, 60, 60)
+                                .addComponent(jLabel2)
+                                .addGap(77, 77, 77)
+                                .addComponent(textFuncao)
+                                .addGap(80, 80, 80)
+                                .addComponent(jLabel5))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(textTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(textFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(textSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textDepartamento)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(257, 257, 257)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(textIDF, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel4))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(textData, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(24, 24, 24)
+                                    .addComponent(addButton)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(altButton))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(37, 37, 37)
+                                            .addComponent(jLabel7))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(28, 28, 28)
+                                            .addComponent(textUser, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(delButton)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(readButton))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(179, 179, 179)
+                                    .addComponent(jLabel8))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(33, 33, 33)
+                                    .addComponent(textSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,19 +171,33 @@ public class Funcionario_View extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5))
+                    .addComponent(textFuncao)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                    .addComponent(textFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(textIDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGap(69, 69, 69)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
                     .addComponent(altButton)
@@ -154,8 +221,13 @@ public class Funcionario_View extends javax.swing.JPanel {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         String nome = textNome.getText();
         String telefone = textTelefone.getText();
-        String cargo = textCargo.getText();
+        String cargo = textFunc.getText();
         double salario = Double.parseDouble(textSalario.getText());
+        String departamento = textDepartamento.getText();
+        String email = textEmail.getText();
+        String usuario = textUser.getText();
+        String senha = textSenha.getText();
+        java.sql.Date hoje = new java.sql.Date(System.currentTimeMillis());
         
         Funcionario addFuncionario = new Funcionario();
         
@@ -163,6 +235,11 @@ public class Funcionario_View extends javax.swing.JPanel {
         addFuncionario.setCargo(cargo);
         addFuncionario.setTelefone(telefone);
         addFuncionario.setSalario(salario);
+        addFuncionario.setDepartamento(departamento);
+        addFuncionario.setEmail(email);
+        addFuncionario.setUsuario(usuario);
+        addFuncionario.setSenha(senha);
+        addFuncionario.setDataCadastro(hoje);
         
         try {
             DAO.Funcionario_DAO.inserir(addFuncionario);
@@ -178,8 +255,12 @@ public class Funcionario_View extends javax.swing.JPanel {
         int id = Integer.parseInt(textIDF.getText());
         String nome = textNome.getText();
         String telefone = textTelefone.getText();
-        String cargo = textCargo.getText();
+        String cargo = textFunc.getText();
         double salario = Double.parseDouble(textSalario.getText());
+        String departamento = textDepartamento.getText();
+        String email = textEmail.getText();
+        String usuario = textUser.getText();
+        String senha = textSenha.getText();
         
         Funcionario altFuncionario = new Funcionario();
         
@@ -188,6 +269,10 @@ public class Funcionario_View extends javax.swing.JPanel {
         altFuncionario.setCargo(cargo);
         altFuncionario.setTelefone(telefone);
         altFuncionario.setSalario(salario);
+        altFuncionario.setDepartamento(departamento);
+        altFuncionario.setEmail(email);
+        altFuncionario.setUsuario(usuario);
+        altFuncionario.setSenha(senha);
         
         try {
             DAO.Funcionario_DAO.atualizar(altFuncionario);
@@ -224,14 +309,27 @@ public class Funcionario_View extends javax.swing.JPanel {
             
          if (readFuncionario != null)   {
              textNome.setText(readFuncionario.getNome());
-             textCargo.setText(readFuncionario.getCargo());
-             textSalario.setText(Double.toString(readFuncionario.getSalario()));
+             textFunc.setText(readFuncionario.getCargo());
+             textSalario.setText("R$"+ Double.toString(readFuncionario.getSalario()));
+             textEmail.setText(readFuncionario.getEmail());
              textTelefone.setText(readFuncionario.getTelefone());
+             textDepartamento.setText(readFuncionario.getDepartamento());
+             if (readFuncionario.getDepartamento() == null) {
+                 textDepartamento.setText("Beta Tester");
+             }
+             
+             textUser.setText(readFuncionario.getUsuario());
+             textSenha.setText(readFuncionario.getSenha());
+             textData.setText(readFuncionario.getDataCadastro().toString());
          }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
         }
     }//GEN-LAST:event_readButtonActionPerformed
+
+    private void textFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFuncActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFuncActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -243,12 +341,22 @@ public class Funcionario_View extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton readButton;
-    private javax.swing.JTextField textCargo;
+    private javax.swing.JTextField textData;
+    private javax.swing.JTextField textDepartamento;
+    private javax.swing.JTextField textEmail;
+    private javax.swing.JTextField textFunc;
+    private javax.swing.JLabel textFuncao;
     private javax.swing.JTextField textIDF;
     private javax.swing.JTextField textNome;
     private javax.swing.JTextField textSalario;
+    private javax.swing.JTextField textSenha;
     private javax.swing.JTextField textTelefone;
+    private javax.swing.JTextField textUser;
     // End of variables declaration//GEN-END:variables
 }

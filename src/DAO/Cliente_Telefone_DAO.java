@@ -5,7 +5,6 @@
 package DAO;
 
 
-import modelos.Cliente_Telefone;
 import conexao.conectar;
 
 import java.sql.*;
@@ -61,7 +60,7 @@ public class Cliente_Telefone_DAO {
 }
 
     
-    public static Cliente_Telefone buscarPorCliente(Cliente cliente) throws SQLException {
+    public static Cliente buscarPorCliente(Cliente cliente) throws SQLException {
     String sql = "SELECT * FROM Cliente_Telefone WHERE ID_Cliente = ?";
 
     try (Connection conn = conectar.getConexao();
@@ -71,11 +70,8 @@ public class Cliente_Telefone_DAO {
 
         try (ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {
-                Cliente_Telefone telefoneCliente = new Cliente_Telefone();
-                telefoneCliente.setID_Telefone(rs.getInt("ID_Telefone"));
-                telefoneCliente.setID_Cliente(rs.getInt("ID_Cliente"));
-                telefoneCliente.setTelefone(rs.getString("Telefone"));
-                return telefoneCliente;
+                cliente.setTelefone(rs.getString("Telefone"));
+                return cliente;
             }
         }
     }

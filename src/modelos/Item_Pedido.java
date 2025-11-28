@@ -29,6 +29,6 @@ public class Item_Pedido {
     public int getID_Produto() {return ID_Produto;}
     public void setID_Produto(int ID_Produto) {this.ID_Produto = ID_Produto;}
     
-    public void getQtde() {return Qtde;}
+    public int getQtde() {return Qtde;}
     public void setQtde(int Qtde) {this.Qtde = Qtde;}
 }

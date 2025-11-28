@@ -1,6 +1,5 @@
 package DAO;
 
-import modelos.Email_Cliente;
 import modelos.Cliente;
 import conexao.conectar;
 
@@ -59,7 +58,7 @@ public class Email_Cliente_DAO {
     }
 
     
-    public static Email_Cliente buscarUmEmail(Cliente cliente) throws SQLException {
+    public static Cliente buscarUmEmail(Cliente cliente) throws SQLException {
     String sql = "SELECT * FROM Email_Cliente WHERE ID_Cliente = ? LIMIT 1";
 
     try (Connection conn = conectar.getConexao();
@@ -69,11 +68,8 @@ public class Email_Cliente_DAO {
 
         try (ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {
-                Email_Cliente emailCliente = new Email_Cliente();
-                emailCliente.setID_Email(rs.getInt("ID_Email"));
-                emailCliente.setID_Cliente(rs.getInt("ID_Cliente"));
-                emailCliente.setEmail(rs.getString("Email"));
-                return emailCliente;
+                cliente.setEmail(rs.getString("Email"));
+                return cliente;
             }
         }
     }

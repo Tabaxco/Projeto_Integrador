@@ -8,13 +8,18 @@ import java.sql.*;
 public class Funcionario_DAO {
 
     public static void inserir(Funcionario funcionario) throws SQLException {
-        String sql = "INSERT INTO Funcionario (Nome, Cargo) VALUES (?, ?)";
+        String sql = "INSERT INTO Funcionario (Nome, Cargo, Email, Usuario, Senha, Data_Contratacao, Departamento) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, funcionario.getNome());
             stmt.setString(2, funcionario.getCargo());
+            stmt.setString(3, funcionario.getEmail());
+            stmt.setString(4, funcionario.getUsuario());
+            stmt.setString(5, funcionario.getSenha());
+            stmt.setDate(6, funcionario.getDataCadastro());
+            stmt.setString(7, funcionario.getDepartamento());
 
             stmt.executeUpdate();
 
@@ -30,14 +35,16 @@ public class Funcionario_DAO {
 
 
     public static void atualizar(Funcionario funcionario) throws SQLException {
-        String sql = "UPDATE Funcionario SET Nome = ?, Cargo = ? WHERE ID_Funcionario = ?";
+        String sql = "UPDATE Funcionario SET Nome = ?, Cargo = ?, Usuario = ?, Senha = ? WHERE ID_Funcionario = ?";
 
         try (Connection conn = conectar.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, funcionario.getNome());
             stmt.setString(2, funcionario.getCargo());
-            stmt.setInt(3, funcionario.getID_Funcionario());
+            stmt.setString(3, funcionario.getUsuario());
+            stmt.setString(4, funcionario.getSenha());
+            stmt.setInt(5, funcionario.getID_Funcionario());
             
             DAO.Funcionario_Telefone_DAO.atualizar(funcionario);
             DAO.Salario_DAO.atualizar(funcionario);
@@ -79,6 +86,11 @@ public class Funcionario_DAO {
                 if (rs.next()) {
                     funcionario.setNome(rs.getString("Nome"));
                     funcionario.setCargo(rs.getString("Cargo"));
+                    funcionario.setDepartamento(rs.getString("Departamento"));
+                    funcionario.setUsuario(rs.getString("Usuario"));
+                    funcionario.setSenha(rs.getString("Senha"));
+                    funcionario.setEmail(rs.getString("Email"));
+                    funcionario.setDataCadastro(rs.getDate("Data_Contratacao"));
                 } else {
                     return null; 
                 }
