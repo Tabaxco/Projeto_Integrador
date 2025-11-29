@@ -21,6 +21,7 @@ public class Cliente_View extends javax.swing.JFrame {
      */
     public Cliente_View() {
         initComponents();
+        setTitle("Visualização de Clientes");
     }
 
     /**

@@ -20,6 +20,7 @@ public class Funcionario_View extends javax.swing.JFrame {
      */
     public Funcionario_View() {
         initComponents();
+        setTitle("Visualização de Funcionários");
     }
 
     /**

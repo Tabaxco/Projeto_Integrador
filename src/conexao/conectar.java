@@ -17,7 +17,6 @@ public class conectar {
     public static Connection getConexao() {
         try {
              Class.forName("com.mysql.cj.jdbc.Driver");
-             System.out.println("Conectado!");
             return DriverManager.getConnection(URL, USER, PASSWORD);
             
          } catch (ClassNotFoundException e) {

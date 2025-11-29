@@ -4,16 +4,12 @@
  */
 package pi_projeto;
 
-import view.MainFrame;
 import DAO.Cliente_DAO;
 import DAO.Funcionario_DAO;
 import java.sql.Date;
 import modelos.Cliente;
 import modelos.Funcionario;
 import javax.swing.JFrame;
-import view.Cliente_View;
-import view.Estoque_View;
-import view.Funcionario_View;
 /**
  *
  * @author guilherme.lrodrigue1

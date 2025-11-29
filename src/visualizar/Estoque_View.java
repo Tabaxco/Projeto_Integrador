@@ -21,6 +21,7 @@ public class Estoque_View extends javax.swing.JFrame {
      */
     public Estoque_View() {
         initComponents();
+        setTitle("Visualização de Estoque");
     }
 
     /**

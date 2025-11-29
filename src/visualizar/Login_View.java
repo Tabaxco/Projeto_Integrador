@@ -19,6 +19,7 @@ public class Login_View extends javax.swing.JFrame {
      */
     public Login_View() {
         initComponents();
+        setTitle("Tela de Login");
     }
 
     /**
