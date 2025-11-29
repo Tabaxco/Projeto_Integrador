@@ -4,6 +4,7 @@
  */
 package pi_projeto;
 
+import view.MainFrame;
 import DAO.Cliente_DAO;
 import DAO.Funcionario_DAO;
 import java.sql.Date;
@@ -23,11 +24,7 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Teste do painel");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setContentPane(new Cliente_View());
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        
+        
     }
 }

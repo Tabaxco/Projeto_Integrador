@@ -1,21 +1,26 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
+package visualizar;
 
 import DAO.Cliente_DAO;
 import javax.swing.JOptionPane;
 import modelos.Cliente;
 
-public class Cliente_View extends javax.swing.JPanel {
+/**
+ *
+ * @author tabaxco
+ */
+public class Cliente_View extends javax.swing.JFrame {
+    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Cliente_View.class.getName());
 
     /**
      * Creates new form Cliente_View
      */
-    public Cliente_View(MainFrame frame) {
+    public Cliente_View() {
         initComponents();
-        
     }
 
     /**
@@ -28,9 +33,13 @@ public class Cliente_View extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        delButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        readButton = new javax.swing.JButton();
         textNome = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        textData = new javax.swing.JTextField();
         textEmail = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         textTelefone = new javax.swing.JTextField();
@@ -38,16 +47,21 @@ public class Cliente_View extends javax.swing.JPanel {
         textIDC = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
         altButton = new javax.swing.JButton();
-        delButton = new javax.swing.JButton();
-        readButton = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        textData = new javax.swing.JTextField();
+        returnButton = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        delButton.setText("Deletar");
+        delButton.addActionListener(this::delButtonActionPerformed);
+
         jLabel1.setText("Nome");
+
+        readButton.setText("Buscar");
+        readButton.addActionListener(this::readButtonActionPerformed);
+
+        jLabel5.setText("Data de Cadastro");
 
         jLabel2.setText("E-mail");
 
@@ -61,13 +75,8 @@ public class Cliente_View extends javax.swing.JPanel {
         altButton.setText("Alterar");
         altButton.addActionListener(this::altButtonActionPerformed);
 
-        delButton.setText("Deletar");
-        delButton.addActionListener(this::delButtonActionPerformed);
-
-        readButton.setText("Buscar");
-        readButton.addActionListener(this::readButtonActionPerformed);
-
-        jLabel5.setText("Data de Cadastro");
+        returnButton.setText("Retornar");
+        returnButton.addActionListener(this::returnButtonActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,26 +96,29 @@ public class Cliente_View extends javax.swing.JPanel {
                         .addComponent(textIDC, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(131, 131, 131))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addButton))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(altButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(13, 13, 13)
+                        .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
+                        .addContainerGap()
+                        .addComponent(addButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(altButton)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                        .addComponent(textTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                        .addComponent(textTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addComponent(readButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(delButton)))
-                .addGap(59, 59, 59))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(delButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(returnButton)
+                        .addGap(17, 17, 17))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jLabel1)
@@ -129,7 +141,7 @@ public class Cliente_View extends javax.swing.JPanel {
                     .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
@@ -137,17 +149,18 @@ public class Cliente_View extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textIDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
+                .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
                     .addComponent(altButton)
+                    .addComponent(readButton)
                     .addComponent(delButton)
-                    .addComponent(readButton))
-                .addGap(43, 43, 43))
+                    .addComponent(returnButton))
+                .addGap(51, 51, 51))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -156,56 +169,16 @@ public class Cliente_View extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        String nome = textNome.getText();
-        java.sql.Date hoje = new java.sql.Date(System.currentTimeMillis());
-        String email = textEmail.getText();
-        String telefone = textTelefone.getText();
-        
-        Cliente novoCliente = new Cliente();
-        novoCliente.setNome(nome);
-        novoCliente.setDataCadastro(hoje);
-        novoCliente.setEmail(email);
-        novoCliente.setTelefone(telefone);
-        
-        try {
-            DAO.Cliente_DAO.inserir(novoCliente);
-            JOptionPane.showMessageDialog(null, "Cliente inserido corretamente.");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
-        }
-        
-        
-    }//GEN-LAST:event_addButtonActionPerformed
-
-    private void altButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altButtonActionPerformed
-        String nome = textNome.getText();
-        int IDcliente = Integer.parseInt(textIDC.getText());
-        String email = textEmail.getText();
-        String telefone = textTelefone.getText();
-        
-        Cliente altCliente = new Cliente();
-        altCliente.setID_Cliente(IDcliente);
-        altCliente.setNome(nome);
-        altCliente.setEmail(email);
-        altCliente.setTelefone(telefone);
-        
-        try {
-            DAO.Cliente_DAO.atualizar(altCliente);
-            JOptionPane.showMessageDialog(null, "Cliente atualizado corretamente.");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
-        }
-    }//GEN-LAST:event_altButtonActionPerformed
 
     private void delButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delButtonActionPerformed
         int IDcliente = Integer.parseInt(textIDC.getText());
-        
+
         Cliente delCliente = new Cliente();
         delCliente.setID_Cliente(IDcliente);
-        
+
         try {
             DAO.Cliente_DAO.deletar(delCliente);
             JOptionPane.showMessageDialog(null, "Cliente excluído corretamente.");
@@ -216,28 +189,98 @@ public class Cliente_View extends javax.swing.JPanel {
 
     private void readButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readButtonActionPerformed
         int IDcliente = Integer.parseInt(textIDC.getText());
-        
+
         Cliente readCliente = new Cliente();
         readCliente.setID_Cliente(IDcliente);
-        
+
         try {
-        readCliente = Cliente_DAO.buscarPorId(readCliente);
+            readCliente = Cliente_DAO.buscarPorId(readCliente);
 
-    if (readCliente != null) {
-        textNome.setText(readCliente.getNome());
-        textTelefone.setText(readCliente.getTelefone());
-        textEmail.setText(readCliente.getEmail());
-        textData.setText(readCliente.getDataCadastro().toString());
-    } else {
-        JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
-    }
+            if (readCliente != null) {
+                textNome.setText(readCliente.getNome());
+                textTelefone.setText(readCliente.getTelefone());
+                textEmail.setText(readCliente.getEmail());
+                textData.setText(readCliente.getDataCadastro().toString());
+            } else {
+                JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
+            }
 
-} catch (Exception e) {
-    JOptionPane.showMessageDialog(null, "Erro ao buscar cliente: " + e.getMessage());
-}
-        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar cliente: " + e.getMessage());
+        }
+
     }//GEN-LAST:event_readButtonActionPerformed
 
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        String nome = textNome.getText();
+        java.sql.Date hoje = new java.sql.Date(System.currentTimeMillis());
+        String email = textEmail.getText();
+        String telefone = textTelefone.getText();
+
+        Cliente novoCliente = new Cliente();
+        novoCliente.setNome(nome);
+        novoCliente.setDataCadastro(hoje);
+        novoCliente.setEmail(email);
+        novoCliente.setTelefone(telefone);
+
+        try {
+            DAO.Cliente_DAO.inserir(novoCliente);
+            JOptionPane.showMessageDialog(null, "Cliente inserido corretamente.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
+        }
+
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void altButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altButtonActionPerformed
+        String nome = textNome.getText();
+        int IDcliente = Integer.parseInt(textIDC.getText());
+        String email = textEmail.getText();
+        String telefone = textTelefone.getText();
+
+        Cliente altCliente = new Cliente();
+        altCliente.setID_Cliente(IDcliente);
+        altCliente.setNome(nome);
+        altCliente.setEmail(email);
+        altCliente.setTelefone(telefone);
+
+        try {
+            DAO.Cliente_DAO.atualizar(altCliente);
+            JOptionPane.showMessageDialog(null, "Cliente atualizado corretamente.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro.");
+        }
+    }//GEN-LAST:event_altButtonActionPerformed
+
+    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
+        new MenuPrincipal().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_returnButtonActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new Cliente_View().setVisible(true));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
@@ -250,6 +293,7 @@ public class Cliente_View extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton readButton;
+    private javax.swing.JButton returnButton;
     private javax.swing.JTextField textData;
     private javax.swing.JTextField textEmail;
     private javax.swing.JTextField textIDC;
