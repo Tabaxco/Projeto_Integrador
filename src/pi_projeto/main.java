@@ -10,6 +10,7 @@ import java.sql.Date;
 import modelos.Cliente;
 import modelos.Funcionario;
 import javax.swing.JFrame;
+import visualizar.Login_View;
 /**
  *
  * @author guilherme.lrodrigue1
@@ -20,7 +21,7 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        new Login_View().setVisible(true);
         
     }
 }

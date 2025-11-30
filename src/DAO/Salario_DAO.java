@@ -15,7 +15,7 @@ public class Salario_DAO {
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setInt(1, funcionario.getID_Funcionario());
-            stmt.setDouble(2, funcionario.getSalario()); // <-- DOUBLE DIRETO
+            stmt.setDouble(2, funcionario.getSalario()); 
 
             stmt.executeUpdate();
 
